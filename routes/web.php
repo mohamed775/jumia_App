@@ -91,7 +91,9 @@ Route::controller(AgentRequestController::class)->group(function () {
  Route::controller(AnalysisController::class)->group(function () {
 
 
-    Route::get('/dashboard.customise', 'channelReport')->name('channelReport');
+    Route::get('/dashboard.customise.report', 'channelReport')->name('channelReport');
+    Route::get('/dashboard.customise.cr', 'ContactReasonReport')->name('ContactReasonReport');
+
     Route::get('/dashboard.table-data.inbound', 'inbound_score')->name('inbound_score');
     Route::get('/dashboard.table-data.liveChat', 'liveChat_score')->name('liveChat_score');
     Route::get('/dashboard.table-data.socialMedia', 'socialMedia_score')->name('socialMedia_score');

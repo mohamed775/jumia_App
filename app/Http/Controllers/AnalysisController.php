@@ -43,12 +43,28 @@ class AnalysisController extends Controller
         $Count_Order = Apology::where('Channel', $channel )->where('ContactReason', $contactReason)->count();
         return view('dashboard.customise',compact('total_request' ,'total_amount' ,'Count_Cases','Count_Order' ,'channel','contactReason' , 'from' , 'to' ));
     }
+    elseif($channel=='' && $contactReason  && $from == '' &&  $to =='')
+    {
+        $total_request = Apology::where('ContactReason', $contactReason)->count();
+        $total_amount = Apology::where('ContactReason', $contactReason)->sum('Amount');
+        $Count_Cases = Apology::where('ContactReason', $contactReason)->DISTINCT('CaseNumber')->count();
+        $Count_Order = Apology::where('ContactReason', $contactReason)->count();
+        return view('dashboard.customise',compact('total_request' ,'total_amount' ,'Count_Cases','Count_Order' ,'channel','contactReason' , 'from' , 'to' ));
+    }
     elseif($channel== '' && $contactReason == ''  && $from &&  $to)
     {
         $total_request = Apology::whereBetween('DateGiven', [$from , $to])->count();
         $total_amount = Apology::whereBetween('DateGiven', [$from , $to])->sum('Amount');
         $Count_Cases = Apology::whereBetween('DateGiven', [$from , $to])->DISTINCT('CaseNumber')->count();
         $Count_Order = Apology::whereBetween('DateGiven', [$from , $to])->count();
+        return view('dashboard.customise',compact('total_request' ,'total_amount' ,'Count_Cases','Count_Order' ,'channel','contactReason' , 'from' , 'to' ));
+    }
+    elseif($channel  && $contactReason == ''  && $from &&  $to)
+    {
+        $total_request = Apology::where('Channel', $channel )->whereBetween('DateGiven', [$from , $to])->count();
+        $total_amount = Apology::where('Channel', $channel )->whereBetween('DateGiven', [$from , $to])->sum('Amount');
+        $Count_Cases = Apology::where('Channel', $channel )->whereBetween('DateGiven', [$from , $to])->DISTINCT('CaseNumber')->count();
+        $Count_Order = Apology::where('Channel', $channel )->whereBetween('DateGiven', [$from , $to])->count();
         return view('dashboard.customise',compact('total_request' ,'total_amount' ,'Count_Cases','Count_Order' ,'channel','contactReason' , 'from' , 'to' ));
     }
     elseif($channel && $contactReason  && $from &&  $to)
@@ -62,6 +78,55 @@ class AnalysisController extends Controller
  
 
 
+    }
+
+    public function ContactReasonReport(Request $request){
+        $from = $request->startDate; 
+        $to = $request->endDate; 
+        $allContactReason = Apology::where('status', 0)->DISTINCT('ContactReason')->get('ContactReason');
+        $data = [];
+      
+        return $data ;
+
+        if($from == '' &&  $to =='')
+        {
+            foreach($allContactReason as $contactReason)
+           {
+            
+            $Contact_Reason = $contactReason->ContactReason ;
+            $Total_Request = Apology::where('ContactReason', $contactReason->ContactReason)->count();
+            $Total_Ex_req = agentRequest::where('ContactReason', $contactReason->ContactReason)->count() ;
+            $Total_Ex_Acc = agentRequest::where('ContactReason', $contactReason->ContactReason)->where('status', 'Accepted')->count() ;
+            $Total_Ex_Rej = agentRequest::where('ContactReason', $contactReason->ContactReason)->where('status', 'Rejected')->count() ;
+            $Amount = Apology::where('ContactReason', $contactReason->ContactReason)->sum('Amount') ;
+            $Count_Cases = Apology::where('ContactReason', $contactReason->ContactReason)->DISTINCT('CaseNumber')->count() ;
+            $Count_Order =  Apology::where('ContactReason', $contactReason->ContactReason)->count();
+           
+            $data[$contactReason->ContactReason]=[$Contact_Reason  , $Total_Request ,$Total_Ex_req ,$Total_Ex_Acc ,$Total_Ex_Rej ,$Amount ,$Count_Cases , $Count_Order ];
+
+           }
+           return $data ;
+
+        }
+        else
+        {
+            foreach($allContactReason as $contactReason)
+           {
+            
+            $Contact_Reason = $contactReason->ContactReason ;
+            $Total_Request = Apology::where('ContactReason', $contactReason->ContactReason)->whereBetween('DateGiven', [$from , $to])->count();
+            $Total_Ex_req = agentRequest::where('ContactReason', $contactReason->ContactReason)->whereBetween('DateGiven', [$from , $to])->count() ;
+            $Total_Ex_Acc = agentRequest::where('ContactReason', $contactReason->ContactReason)->where('status', 'Accepted')->whereBetween('DateGiven', [$from , $to])->count() ;
+            $Total_Ex_Rej = agentRequest::where('ContactReason', $contactReason->ContactReason)->where('status', 'Rejected')->whereBetween('DateGiven', [$from , $to])->count() ;
+            $Amount = Apology::where('ContactReason', $contactReason->ContactReason)->whereBetween('DateGiven', [$from , $to])->sum('Amount') ;
+            $Count_Cases = Apology::where('ContactReason', $contactReason->ContactReason)->whereBetween('DateGiven', [$from , $to])->DISTINCT('CaseNumber')->count() ;
+            $Count_Order =  Apology::where('ContactReason', $contactReason->ContactReason)->whereBetween('DateGiven', [$from , $to])->count();
+           
+            $data[$contactReason->ContactReason]=[$Contact_Reason  , $Total_Request ,$Total_Ex_req ,$Total_Ex_Acc ,$Total_Ex_Rej ,$Amount ,$Count_Cases , $Count_Order ];
+
+           }
+           return $data ;
+        }
     }
 
 

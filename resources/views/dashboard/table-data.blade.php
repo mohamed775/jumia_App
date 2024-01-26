@@ -7,6 +7,8 @@
 <link href="{{URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
+<link href="assets/css/custom.css" rel="stylesheet" media="all">
+
 @endsection
 @section('page-header')
 				<!-- breadcrumb -->
@@ -16,31 +18,7 @@
 							<h4 class="content-title mb-0 my-auto">Tables</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Data Tables</span>
 						</div>
 					</div>
-					<div class="d-flex my-xl-auto right-content">
-						<div class="pr-1 mb-3 mb-xl-0">
-							<button type="button" class="btn btn-info btn-icon ml-2"><i class="mdi mdi-filter-variant"></i></button>
-						</div>
-						<div class="pr-1 mb-3 mb-xl-0">
-							<button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-star"></i></button>
-						</div>
-						<div class="pr-1 mb-3 mb-xl-0">
-							<button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
-						</div>
-						<div class="mb-3 mb-xl-0">
-							<div class="btn-group dropdown">
-								<button type="button" class="btn btn-primary">14 Aug 2019</button>
-								<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" id="dropdownMenuDate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="sr-only">Toggle Dropdown</span>
-								</button>
-								<div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuDate" data-x-placement="bottom-end">
-									<a class="dropdown-item" href="#">2015</a>
-									<a class="dropdown-item" href="#">2016</a>
-									<a class="dropdown-item" href="#">2017</a>
-									<a class="dropdown-item" href="#">2018</a>
-								</div>
-							</div>
-						</div>
-					</div>
+				
 				</div>
 				<!-- breadcrumb -->
 @endsection
@@ -50,6 +28,35 @@
 			
 					<div class="col-xl-12">
 						<div class="card">
+							<br>
+							<form method="GET" action="{{route('channelReport')}}">
+								<div class="form-row m-2">
+									<div class="form-group col-md-3">
+										<label for="inputState">Channel</label>
+										<select id="inputState" class="form-control custom-select" name="channelName">
+										  <option selected >{{$channel ?? ''}}</option>
+										  <option>ِCS Inbound</option>
+										  <option>Live Chat</option>
+										  <option>Social Media</option>
+										  <option>IR</option>
+										  <option>Sales</option>
+										</select>
+									</div>
+									
+									<div class="form-group col-md-2">
+										<label for="inputState">From</label>
+										<input type="datetime-local" class="form-control" id="inlineFormInputName"  name="startDate" ">
+									</div>
+									<div class="form-group col-md-2">
+										<label for="inputState">To</label>
+										<input type="datetime-local" class="form-control" id="inlineFormInputName" name="endDate" ">
+									</div>
+									
+									<div class="form-group col-md-3 mt-4 mr-2 ">
+										<button class="glow-on-hover" type="submit">Filter</button>							
+								    </div>
+								  </div>
+							</form>
 							<div class="card-header pb-0">
 								<div class="d-flex justify-content-between">
 									<h4 class="card-title mg-b-0">STRIPED ROWS</h4>
