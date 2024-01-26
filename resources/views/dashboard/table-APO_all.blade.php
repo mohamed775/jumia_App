@@ -500,6 +500,7 @@
 												<th class="border-bottom-0">VoucherExpiretionDate</th>
 												<th class="border-bottom-0">ContactReason</th>
 												<th class="border-bottom-0">OrderNumber</th>
+												<th class="border-bottom-0">CaseNumber</th>
 												<th class="border-bottom-0">CustomerEmail</th>
 												<th class="border-bottom-0">CustomerID</th>
 												<th class="border-bottom-0">DateGiven</th>
@@ -518,12 +519,14 @@
 												<td>{{$data->ExpaireDate}}</td>
 												<td>{{$data->ContactReason}}</td>
 												<td>{{$data->OrderNumber}}</td>
+												<td>{{$data->CaseNumber}}</td>
 												<td>{{$data->CustomerEmail}}</td>
 												<td>{{$data->CustomerID}}</td>
 												<td>{{$data->DateGiven}}</td>	
 												<td>{{$data->Channel}}</td>
 												<td>{{$data->AgentName}}</td>
 												@else	
+												<td style="opacity: 0.5">Null</td>
 												<td style="opacity: 0.5">Null</td>
 												<td style="opacity: 0.5">Null</td>
 												<td style="opacity: 0.5">Null</td>

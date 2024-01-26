@@ -38,48 +38,43 @@
 						<div class="card">
 							<br>
 							<form method="GET" action="{{route('channelReport')}}">
-								<div class="d-flex my-xl-auto right-content">
-									<div class="mb-3 mr-3">
-											<div class="input-group">
-												<div class="rs-select2 js-select-simple select--no-search">
-													<select name="channelName"  >
-														<option disabled="disabled" selected="selected">Channel</option>
-														<option>CS Inbound</option>
-														<option>Live Chat</option>
-														<option>Social Media</option>
-														<option>IR Team</option>
-														<option>Sales</option>
-													</select>
-													<div class="select-dropdown"></div>
-												</div>
-										   </div>
+								<div class="form-row m-2">
+									<div class="form-group col-md-3">
+										<label for="inputState">Channel</label>
+										<select id="inputState" class="form-control custom-select" name="channelName">
+										  <option selected >{{$channel ?? ''}}</option>
+										  <option>ِCS Inbound</option>
+										  <option>Live Chat</option>
+										  <option>Social Media</option>
+										  <option>IR</option>
+										  <option>Sales</option>
+										</select>
 									</div>
-							
-									<div class="mb-3">
-										<div class="col-2">
-											<div class="input-group">
-												<div class="input-group-icon">
-													<input type="datetime-local" name="startDate"  placeholder="from"> 
-												</div>
-											</div>
-										</div>
-			
+									<div class="form-group col-md-3">
+									  <label for="inputState">Contact Reason</label>
+									  <select id="inputState" class="form-control custom-select" name="contactReason">
+										<option selected>{{$contactReason ?? '' }}</option>
+										<option>Cancellation by Jumia/Seller</option>
+										<option>Delivery agent misbehaviour/appearance</option>
+										<option>Delivery delay</option>
+										<option>Late Refund</option>
+										<option>Failed Delivery</option>
+										<option>Late return pickup / Tax invoice</option>
+										<option>Invalid voucher</option>
+									  </select>
 									</div>
-									<div class="mb-3 ml-3">
-										<div class="col-2">
-											<div class="input-group">
-												<div class="input-group-icon">
-													<input type="datetime-local" name="endDate"   placeholder="from"> 
-												</div>
-											</div>
-										</div>
-			
+									<div class="form-group col-md-2">
+										<label for="inputState">From</label>
+										<input type="datetime-local" class="form-control" id="inlineFormInputName"  name="startDate" placeholder="{{ $from ?? ''}}">
 									</div>
-									
-									<div class="mb-3 ">
-											<button class="glow-on-hover" type="submit">Filter</button>							
+									<div class="form-group col-md-2">
+										<label for="inputState">To</label>
+										<input type="datetime-local" class="form-control" id="inlineFormInputName" name="endDate" placeholder="{{$to ?? ''}}">
 									</div>
-								</div>
+									  <div class="form-group col-md-4 ">
+										<button class="glow-on-hover" type="submit">Filter</button>							
+								      </div>
+								  </div>
 							</form>
 							<div class="card-header pb-0">
 								<div class="d-flex justify-content-between">
