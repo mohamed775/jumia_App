@@ -47,7 +47,7 @@
 										<label for="inputState">To</label>
 										<input type="datetime-local" class="form-control" id="inlineFormInputName" name="endDate" placeholder="{{$to ?? ''}}">
 									</div>
-									  <div class="form-group col-md-4 ">
+									  <div class="form-group  mt-4 mr-3">
 										<button class="glow-on-hover" type="submit">Filter</button>							
 								      </div>
 								  </div>
@@ -75,20 +75,16 @@
 												<th></th>
 											</tr>
 										</thead>
-										<tbody>
-											
-											@if (isset($total_request))
+										<tbody>										
+											@if (isset($data))
+											@foreach ($data as $contactReason =>$contactReasonData)
 											<tr>
-												<td>{{$total_request}}</td>
-												<td>{{$total_amount}}</td>
-												<td>{{$Count_Cases}}</td>
-												<td>{{$Count_Order}}</td>
-												<td>{{$total_request}}</td>
-												<td>{{$total_request}}</td>
-												<td>{{$total_request}}</td>
-												<td>{{$total_request}}</td>
-												<td></td>
+												<td>{{$contactReason}}</td>
+												@foreach($contactReasonData as $contactReasonData )
+												<td>{{$contactReasonData}}</td>
+												@endforeach
 											</tr>
+											@endforeach
 											@endif
 										</tbody>
 									</table>

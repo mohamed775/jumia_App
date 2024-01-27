@@ -23,26 +23,21 @@
 				<!-- breadcrumb -->
 @endsection
 @section('content')
+
+@if(isset($channelData))
+<?php  $route = route('channelScore') ?>
+@elseif(isset($AgentData))
+<?php  $route = route('agentScore') ?>
+@endif
 				<!-- row opened -->
 				<div class="row row-sm">
 			
 					<div class="col-xl-12">
 						<div class="card">
 							<br>
-							<form method="GET" action="{{route('channelReport')}}">
+							<form method="GET" action="{{$route}}">
 								<div class="form-row m-2">
-									<div class="form-group col-md-3">
-										<label for="inputState">Channel</label>
-										<select id="inputState" class="form-control custom-select" name="channelName">
-										  <option selected >{{$channel ?? ''}}</option>
-										  <option>ِCS Inbound</option>
-										  <option>Live Chat</option>
-										  <option>Social Media</option>
-										  <option>IR</option>
-										  <option>Sales</option>
-										</select>
-									</div>
-									
+										
 									<div class="form-group col-md-2">
 										<label for="inputState">From</label>
 										<input type="datetime-local" class="form-control" id="inlineFormInputName"  name="startDate" ">
@@ -59,52 +54,39 @@
 							</form>
 							<div class="card-header pb-0">
 								<div class="d-flex justify-content-between">
-									<h4 class="card-title mg-b-0">STRIPED ROWS</h4>
+									<h4 class="card-title mg-b-0">channel Table</h4>
 									<i class="mdi mdi-dots-horizontal text-gray"></i>
 								</div>
-								<p class="tx-12 tx-gray-500 mb-2">Example of Valex Striped Rows.. <a href="">Learn more</a></p>
+								<p class="tx-12 tx-gray-500 mb-2">This table show channel score and ou can filter it by date .</p>
 							</div>
 							<div class="card-body">
 								<div class="table-responsive">
 									<table class="table text-md-nowrap example2">
 										<thead>
 											<tr>
-												<th class="wd-15p border-bottom-0">AgentEmail</th>
-												<th class="wd-15p border-bottom-0">Total_Auto_Request</th>
-												<th class="wd-15p border-bottom-0">Total_Ex_Request</th>
-												<th class="wd-15p border-bottom-0">Total_Acc_Request</th>
-												<th class="wd-15p border-bottom-0">Total_Rej_Request</th>
-												<th class="wd-20p border-bottom-0">Total_Apo_Amount</th>
-												<th class="wd-25p border-bottom-0">Cases_Count</th>
-												<th class="wd-25p border-bottom-0">Orders_Count</th>
+												@if(isset($channelData))
+												<th class="wd-15p border-bottom-0">Channel</th>
+												@elseif(isset($AgentData))
+												<th class="wd-15p border-bottom-0">agent_Name</th>
+												@endif
+												<th class="wd-15p border-bottom-0">Total_Request</th>
+												<th class="wd-15p border-bottom-0">Total_Ex_req</th>
+												<th class="wd-15p border-bottom-0">Total_Ex_Acc</th>
+												<th class="wd-15p border-bottom-0">Total_Ex_Rej</th>
+												<th class="wd-15p border-bottom-0">Amount</th>
+												<th class="wd-15p border-bottom-0">Count_Cases</th>
+												<th class="wd-20p border-bottom-0">Count_Order</th>
+												<th></th>
 											</tr>
 										</thead>
 										<tbody>
-											@if (isset($agent_data))
-											@foreach ($agent_data as $agent_data)												
+											@if (isset($AgentData))
+											@foreach ($AgentData as $agentName =>$agentScore)
 											<tr>
-												<td>{{$agent_data->email}}</td>
-												<td>
-													{{\App\Models\Apology::where('AgentName', $agent_data->email)->count()}}
-												</td>
-												<td>
-													{{\App\Models\agentRequest::where('AgentName', $agent_data->email)->count()}}
-												</td>
-												<td>
-													{{\App\Models\agentRequest::where('AgentName', $agent_data->email)->where('status','Accepted')->count()}}
-												</td>
-												<td>
-													{{\App\Models\agentRequest::where('AgentName', $agent_data->email)->where('status','Rejected')->count()}}
-												</td>
-												<td>
-													{{\App\Models\Apology::where('AgentName', $agent_data->email)->sum('Amount')}}
-												</td>
-												<td>
-													{{\App\Models\Apology::where('AgentName', $agent_data->email)->count('OrderNumber')}}
-												</td>
-												<td>
-													{{\App\Models\Apology::where('AgentName', $agent_data->email)->count('CaseNumber')}}
-												</td>
+												<td>{{$agentName }}</td>
+												@foreach($agentScore as $agentScore )
+												<td>{{$agentScore}}</td>
+												@endforeach
 											</tr>
 											@endforeach
 											@endif
