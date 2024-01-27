@@ -199,7 +199,7 @@ class AnalysisController extends Controller
             $AgentData[$agent->AgentName]=[ $Total_Request  , $Total_Ex_req , $Total_Ex_Acc ,$Total_Ex_Rej ,$Amount ,$Count_Cases ,$Count_Order ];
 
            }
-           return view('dashboard.table-data',['AgentData' => $AgentData]);
+           return view('dashboard.table-data',['AgentData' => $AgentData] );
 
         }
         elseif($channel && $from == '' &&  $to =='')
@@ -219,7 +219,7 @@ class AnalysisController extends Controller
             $AgentData[$agent->AgentName]=[ $Total_Request  , $Total_Ex_req , $Total_Ex_Acc ,$Total_Ex_Rej ,$Amount ,$Count_Cases ,$Count_Order ];
 
            }
-           return view('dashboard.table-data',['AgentData' => $AgentData]);
+           return view('dashboard.table-data',['AgentData' => $AgentData], compact('channel'));
 
         }
         elseif($channel && $from &&  $to)

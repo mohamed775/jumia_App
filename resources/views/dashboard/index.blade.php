@@ -12,7 +12,7 @@
 					<div class="left-content">
 						<div>
 						  <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Hi, welcome back!</h2>
-						  <p class="mg-b-0">Sales monitoring dashboard template.</p>
+						  <p class="mg-b-0">Apology monitoring dashboard .</p>
 						</div>
 					</div>
 					<div class="main-dashboard-header-right">
@@ -216,23 +216,29 @@
 						<div class="card">
 							<div class="card-header bg-transparent pd-b-0 pd-t-20 bd-b-0">
 								<div class="d-flex justify-content-between">
-									<h4 class="card-title mb-0">Order status</h4>
+									<h4 class="card-title mb-0">Exceptional Requests</h4>
 									<i class="mdi mdi-dots-horizontal text-gray"></i>
 								</div>
-								<p class="tx-12 text-muted mb-0">Order Status and Tracking. Track your order from ship date to arrival. To begin, enter your order number.</p>
+								<p class="tx-12 text-muted mb-0">Requests Status and Tracking. Track your Status from ship date to arrival.</p>
 							</div>
 							<div class="card-body">
 								<div class="total-revenue">
 									<div>
-									  <h4>120,750</h4>
+									  <h4>
+										{{\App\Models\agentRequest::where('status' , 'Accepted')->count()}}
+									  </h4>
 									  <label><span class="bg-primary"></span>success</label>
 									</div>
 									<div>
-									  <h4>56,108</h4>
+									  <h4>
+										{{\App\Models\agentRequest::where('status' , 'Pending')->count()}}
+									  </h4>
 									  <label><span class="bg-danger"></span>Pending</label>
 									</div>
 									<div>
-									  <h4>32,895</h4>
+									  <h4>
+										{{\App\Models\agentRequest::where('status' , 'Rejected')->count()}}
+									  </h4>
 									  <label><span class="bg-warning"></span>Failed</label>
 									</div>
 								  </div>
@@ -379,25 +385,24 @@
 					<div class="col-xl-4 col-md-12 col-lg-6">
 						<div class="card">
 							<div class="card-header pb-0">
-								<h3 class="card-title mb-2">Recent Orders</h3>
-								<p class="tx-12 mb-0 text-muted">An order is an investor's instructions to a broker or brokerage firm to purchase or sell</p>
+								<h3 class="card-title mb-2">Apology status</h3>
+								<p class="tx-12 mb-0 text-muted">This show how many apology taken and available</p>
 							</div>
 							<div class="card-body sales-info ot-0 pt-0 pb-0">
 								<div id="chart" class="ht-150"></div>
 								<div class="row sales-infomation pb-0 mb-0 mx-auto wd-100p">
 									<div class="col-md-6 col">
-										<p class="mb-0 d-flex"><span class="legend bg-primary brround"></span>Delivered</p>
-										<h3 class="mb-1">5238</h3>
-										<div class="d-flex">
-											<p class="text-muted ">Last 6 months</p>
-										</div>
+										<p class="mb-0 d-flex"><span class="legend bg-primary brround"></span>Taken</p>
+										<h3 class="mb-1">
+											{{\App\Models\Apology::where('status' , 0)->count()}}
+										</h3>
 									</div>
 									<div class="col-md-6 col">
-										<p class="mb-0 d-flex"><span class="legend bg-info brround"></span>Cancelled</p>
-											<h3 class="mb-1">3467</h3>
-										<div class="d-flex">
-											<p class="text-muted">Last 6 months</p>
-										</div>
+										<p class="mb-0 d-flex"><span class="legend bg-info brround"></span>available</p>
+											<h3 class="mb-1">
+												{{\App\Models\Apology::where('status' , 1)->count()}}
+											</h3>
+										
 									</div>
 								</div>
 							</div>
@@ -407,18 +412,22 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="d-flex align-items-center pb-2">
-											<p class="mb-0">Total Sales</p>
+											<p class="mb-0">Total Taken</p>
 										</div>
-										<h4 class="font-weight-bold mb-2">$7,590</h4>
+										<h4 class="font-weight-bold mb-2">
+											{{\App\Models\Apology::where('status' , 0)->sum('Amount')}}
+										</h4>
 										<div class="progress progress-style progress-sm">
 											<div class="progress-bar bg-primary-gradient wd-80p" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="78"></div>
 										</div>
 									</div>
 									<div class="col-md-6 mt-4 mt-md-0">
 										<div class="d-flex align-items-center pb-2">
-											<p class="mb-0">Active Users</p>
+											<p class="mb-0">Total Active</p>
 										</div>
-										<h4 class="font-weight-bold mb-2">$5,460</h4>
+										<h4 class="font-weight-bold mb-2">
+											{{\App\Models\Apology::where('status' , 1)->sum('Amount')}}
+										</h4>
 										<div class="progress progress-style progress-sm">
 											<div class="progress-bar bg-danger-gradient wd-75" role="progressbar"  aria-valuenow="45" aria-valuemin="0" aria-valuemax="45"></div>
 										</div>
