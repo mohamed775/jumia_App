@@ -6,7 +6,7 @@ use App\Http\Controllers\AgentRequestController;
 use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\ApologyController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\homeAnalysisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,9 +28,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard.index');
-    })->name('dashboard');
+    Route::get('/dashboard', [homeAnalysisController::class , 'HomeAnalysis'])->name('dashboard');
 });
 
 
@@ -98,6 +96,13 @@ Route::controller(AgentRequestController::class)->group(function () {
     Route::get('/dashboard.report.agent', 'agentScore')->name('agentScore'); 
 
  
+ });
+
+ Route::controller(homeAnalysisController::class)->group(function () {
+
+
+    // Route::get('/dashboard', 'HomeAnalysis')->name('HomeAnalysis');
+   
  });
  
 

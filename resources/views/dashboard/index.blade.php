@@ -222,7 +222,7 @@
 								<p class="tx-12 text-muted mb-0">Requests Status and Tracking. Track your Status from ship date to arrival.</p>
 							</div>
 							<div class="card-body">
-								<div class="total-revenue">
+								{{-- <div class="total-revenue">
 									<div>
 									  <h4>
 										{{\App\Models\agentRequest::where('status' , 'Accepted')->count()}}
@@ -241,18 +241,16 @@
 									  </h4>
 									  <label><span class="bg-warning"></span>Failed</label>
 									</div>
-								  </div>
-								<div id="bar" class="sales-bar mt-4"></div>
+								  </div> --}}
+								<div>
+									{!! $chartjs_2->render() !!}
+								</div>
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-12 col-xl-5">
 						<div class="card card-dashboard-map-one">
-							<label class="main-content-label">Sales Revenue by Customers in USA</label>
-							<span class="d-block mg-b-20 text-muted tx-12">Sales Performance of all states in the United States</span>
-							<div class="">
-								<div class="vmap-wrapper ht-180" id="vmap2"></div>
-							</div>
+							{!! $chartjs->render() !!}
 						</div>
 					</div>
 				</div>
