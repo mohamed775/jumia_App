@@ -37,7 +37,19 @@
 							<br>
 							<form method="GET" action="{{route($route)}}">
 								<div class="form-row m-2">
-										
+									@if(isset($AgentData))	
+									<div class="form-group col-md-3">
+										<label for="inputState">Channel</label>
+										<select id="inputState" class="form-control custom-select" name="channelName">
+										  <option selected >{{$channel ?? ''}}</option>
+										  <option>ِCS Inbound</option>
+										  <option>Live Chat</option>
+										  <option>Social Media</option>
+										  <option>IR</option>
+										  <option>Sales</option>
+										</select>
+									</div>
+									@endif
 									<div class="form-group col-md-2">
 										<label for="inputState">From</label>
 										<input type="datetime-local" class="form-control" id="inlineFormInputName"  name="startDate" ">

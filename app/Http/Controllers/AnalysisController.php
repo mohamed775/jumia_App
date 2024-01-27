@@ -179,10 +179,12 @@ class AnalysisController extends Controller
 
         $from = $request->startDate; 
         $to = $request->endDate; 
-        $agent = Apology::where('status', 0)->DISTINCT('AgentName')->get('AgentName');
+        $channel = $request->channelName ;
         $AgentData =[];
-        if($from == '' &&  $to =='')
+
+        if($channel=='' && $from == '' &&  $to =='')
         {
+            $agent = Apology::where('status', 0)->DISTINCT('AgentName')->get('AgentName');
            foreach($agent as $agent)
            {
             
@@ -200,8 +202,30 @@ class AnalysisController extends Controller
            return view('dashboard.table-data',['AgentData' => $AgentData]);
 
         }
-        elseif($from &&  $to)
+        elseif($channel && $from == '' &&  $to =='')
+        {
+           $agent = Apology::where('status', 0)->where('Channel',  $channel)->DISTINCT('AgentName')->get('AgentName');
+           foreach($agent as $agent)
+           {
+            
+            $Total_Request = Apology::where('AgentName', $agent->AgentName)->count();
+            $Total_Ex_req = agentRequest::where('AgentName', $agent->AgentName)->count() ;
+            $Total_Ex_Acc = agentRequest::where('AgentName', $agent->AgentName)->where('status', 'Accepted')->count() ;
+            $Total_Ex_Rej = agentRequest::where('AgentName', $agent->AgentName)->where('status', 'Rejected')->count() ;
+            $Amount = Apology::where('AgentName', $agent->AgentName)->sum('Amount') ;
+            $Count_Cases = Apology::where('AgentName', $agent->AgentName)->DISTINCT('CaseNumber')->count() ;
+            $Count_Order =  Apology::where('AgentName', $agent->AgentName)->count();
+           
+            $AgentData[$agent->AgentName]=[ $Total_Request  , $Total_Ex_req , $Total_Ex_Acc ,$Total_Ex_Rej ,$Amount ,$Count_Cases ,$Count_Order ];
+
+           }
+           return view('dashboard.table-data',['AgentData' => $AgentData]);
+
+        }
+        elseif($channel && $from &&  $to)
         {   
+            $agent = Apology::where('status', 0)->where('Channel',  $channel)->DISTINCT('AgentName')->get('AgentName');
+
             foreach($agent as $agent)
            {
             
