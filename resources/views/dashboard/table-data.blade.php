@@ -25,9 +25,9 @@
 @section('content')
 
 @if(isset($channelData))
-<?php  $route = route('channelScore') ?>
+<?php $route = 'channelScore' ?>
 @elseif(isset($AgentData))
-<?php  $route = route('agentScore') ?>
+<?php $route = 'agentScore' ?>
 @endif
 				<!-- row opened -->
 				<div class="row row-sm">
@@ -35,7 +35,7 @@
 					<div class="col-xl-12">
 						<div class="card">
 							<br>
-							<form method="GET" action="{{$route}}">
+							<form method="GET" action="{{route($route)}}">
 								<div class="form-row m-2">
 										
 									<div class="form-group col-md-2">
@@ -86,6 +86,15 @@
 												<td>{{$agentName }}</td>
 												@foreach($agentScore as $agentScore )
 												<td>{{$agentScore}}</td>
+												@endforeach
+											</tr>
+											@endforeach
+											@elseif(isset($channelData))
+											@foreach ($channelData as $channelName =>$channelScore)
+											<tr>
+												<td>{{$channelName }}</td>
+												@foreach($channelScore as $channelScore )
+												<td>{{$channelScore}}</td>
 												@endforeach
 											</tr>
 											@endforeach

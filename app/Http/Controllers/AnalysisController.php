@@ -202,7 +202,7 @@ class AnalysisController extends Controller
         }
         elseif($from &&  $to)
         {   
-            foreach($agent as $Agent)
+            foreach($agent as $agent)
            {
             
             $Total_Request = Apology::where('AgentName', $agent->AgentName)->whereBetween('DateGiven', [$from , $to])->count();
