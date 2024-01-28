@@ -325,7 +325,7 @@
 								<h3 class="card-title mb-2">Sales Activity</h3>
 								<p class="tx-12 mb-0 text-muted">Sales activities are the tactics that salespeople use to achieve their goals and objective</p>
 							</div>
-							<div class="product-timeline card-body pt-2 mt-1">
+							{{-- <div class="product-timeline card-body pt-2 mt-1">
 								<ul class="timeline-1 mb-0">
 									<li class="mt-0"> <i class="ti-pie-chart bg-primary-gradient text-white product-icon"></i> <span class="font-weight-semibold mb-4 tx-14 ">Total Products</span> <a href="#" class="float-left tx-11 text-muted">3 days ago</a>
 										<p class="mb-0 text-muted tx-12">1.3k New Products</p>
@@ -346,7 +346,7 @@
 										<p class="mb-0 text-muted tx-12">1.5k reviews</p>
 									</li>
 								</ul>
-							</div>
+							</div> --}}
 						</div>
 					</div>
 					<div class="col-xl-4 col-md-12 col-lg-6">
@@ -411,7 +411,7 @@
 					<div class="col-md-12 col-lg-4 col-xl-4">
 						<div class="card card-dashboard-eight pb-2">
 							<h6 class="card-title">Your Top Countries</h6><span class="d-block mg-b-10 text-muted tx-12">Sales performance revenue based by country</span>
-							<div class="list-group">
+							{{-- <div class="list-group">
 								<div class="list-group-item border-top-0">
 									<i class="flag-icon flag-icon-us flag-icon-squared"></i>
 									<p>United States</p><span>$1,671.10</span>
@@ -436,7 +436,7 @@
 									<i class="flag-icon flag-icon-au flag-icon-squared"></i>
 									<p>Australia</p><span>$1,042.00</span>
 								</div>
-							</div>
+							</div> --}}
 						</div>
 					</div>
 					<div class="col-md-12 col-lg-8 col-xl-8">
