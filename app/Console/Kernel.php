@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('channel:weekly-report')->everyMinute();
+        $schedule->command('channel:weekly-report')->weekly();
     }
 
     /**

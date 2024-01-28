@@ -8,6 +8,7 @@ use App\Models\Apology;
 use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class homeAnalysisController extends Controller
 {
@@ -40,10 +41,17 @@ class homeAnalysisController extends Controller
         $total_request_IR = Apology::where('Channel' , 'IR Team')->count();
         $total_request_sales =Apology::where('Channel' , 'Sales')->count();
 
-        // channel weekly 
+       // top 5 agent
+        $topAgents = DB::table('apologies')
+                        ->select('AgentName', DB::raw('SUM(amount) as total_amount'))
+                        ->where('Status' , 0)
+                        ->groupBy('AgentName')
+                        ->orderByDesc('total_amount')
+                        ->limit(5)
+                        ->get();  
+                        
         
-        
-
+       //
 
 
 
@@ -132,7 +140,7 @@ class homeAnalysisController extends Controller
         return view('dashboard.index' , compact('chartjs' , 'chartjs_2' , 'total_25_taken' ,'total_25_avaliable', 'total_50_taken' 
         ,'total_50_avaliable' , 'total_100_taken' ,'total_100_avaliable' , 'total_150_taken' ,'total_150_avaliable' 
         , 'total_200_taken' ,'total_200_avaliable' , 'total_300_taken' ,'total_300_avaliable' , 'total_400_taken' 
-        ,'total_400_avaliable' , 'total_500_taken' ,'total_500_avaliable' ));
+        ,'total_400_avaliable' , 'total_500_taken' ,'total_500_avaliable' ,'topAgents' ));
     }
 
 
