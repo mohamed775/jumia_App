@@ -280,8 +280,8 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-12 col-xl-5">
-						<div class="card card-dashboard-map-one">
+					<div class="col-lg-12 col-xl-5" >
+						<div class="card card-dashboard-map-one" > 
 							{!! $chartjs->render() !!}
 						</div>
 					</div>
