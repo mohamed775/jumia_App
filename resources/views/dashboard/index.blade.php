@@ -436,7 +436,7 @@
 									<i class="flag-icon flag-icon-au flag-icon-squared"></i>
 									<p>Australia</p><span>$1,042.00</span>
 								</div>
-							</div> --}}
+							</div> --}} 
 						</div>
 					</div>
 					<div class="col-md-12 col-lg-8 col-xl-8">
